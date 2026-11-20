@@ -53,6 +53,12 @@ src/main/java/org/project/student_management_system/
 | `PUT` | `/api/v1/students/{id}` | 根据 ID 更新学生信息 | `StudentDto` (JSON) | `200 OK` |
 | `DELETE` | `/api/v1/students/{id}` | 根据 ID 删除学生 | 无 | `204 No Content` |
 
+查询、更新或删除不存在的学生时返回 `404 Not Found`，响应示例：
+```json
+{"status": 404, "message": "Student not found with ID: 42"}
+```
+学生列表为空时仍返回 `200 OK` 和空数组；无效 ID 或格式错误的 JSON 由框架返回 `400 Bad Request`。
+
 #### 数据传输对象示例 (StudentDto JSON)
 ```json
 {
@@ -149,6 +155,12 @@ Base URL: `/api/v1/students`
 | `GET` | `/api/v1/students/{id}` | Get student by ID | None | `200 OK` |
 | `PUT` | `/api/v1/students/{id}` | Update student by ID | `StudentDto` (JSON) | `200 OK` |
 | `DELETE` | `/api/v1/students/{id}` | Delete student by ID | None | `204 No Content` |
+
+Reading, updating, or deleting a missing student returns `404 Not Found`, for example:
+```json
+{"status": 404, "message": "Student not found with ID: 42"}
+```
+An empty student list still returns `200 OK` with an empty array. Invalid IDs and malformed JSON return `400 Bad Request` from the framework.
 
 #### Data Transfer Object Example (StudentDto JSON)
 ```json

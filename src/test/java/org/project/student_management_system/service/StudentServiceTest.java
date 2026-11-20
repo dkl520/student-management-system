@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.project.student_management_system.dto.StudentDto;
 import org.project.student_management_system.entity.Student;
+import org.project.student_management_system.exception.StudentNotFoundException;
 import org.project.student_management_system.repository.StudentRepository;
 
 import java.util.List;
@@ -72,7 +73,7 @@ class StudentServiceTest {
     void testGetStudentByIdNotFound() {
         when(studentRepository.findById(2L)).thenReturn(Optional.empty());
 
-        assertThrows(RuntimeException.class, () -> studentService.getStudentById(2L));
+        assertThrows(StudentNotFoundException.class, () -> studentService.getStudentById(2L));
     }
 
     @Test

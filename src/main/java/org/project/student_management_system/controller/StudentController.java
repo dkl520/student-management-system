@@ -12,27 +12,27 @@ import java.util.List;
 @RequestMapping("api/v1/students")
 public class StudentController {
 
-    private final StudentService studentService;
+    private final StudentService ss;
 
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
+    public StudentController(StudentService ss) {
+        this.ss = ss;
     }
 
     @PostMapping("/create")
     public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto studentDto) {
-        StudentDto savedStudent = studentService.createStudent(studentDto);
+        StudentDto savedStudent = ss.createStudent(studentDto);
         return new ResponseEntity<>(savedStudent, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<StudentDto>> getAllStudents() {
-        List<StudentDto> students = studentService.getAllStudents();
+        List<StudentDto> students = ss.getAllStudents();
         return ResponseEntity.ok(students);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentDto> getStudentById(@PathVariable long id) {
-        StudentDto studentDto = studentService.getStudentById(id);
+        StudentDto studentDto = ss.getStudentById(id);
         return ResponseEntity.ok(studentDto);
     }
 
@@ -40,13 +40,13 @@ public class StudentController {
     public ResponseEntity<StudentDto> updateStudent(
             @PathVariable Long id,
             @RequestBody StudentDto studentDto) {
-        StudentDto updatedStudent = studentService.updateStudent(id, studentDto);
+        StudentDto updatedStudent = ss.updateStudent(id, studentDto);
         return ResponseEntity.ok(updatedStudent);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable long id) {
-        studentService.deleteStudent(id);
+        ss.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
 }
