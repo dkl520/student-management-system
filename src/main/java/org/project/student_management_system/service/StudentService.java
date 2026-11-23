@@ -41,7 +41,6 @@ public class StudentService {
     }
 
     // 写操作：加入或新建事务；READ_COMMITTED 保证不会基于其他事务未提交的数据写入
-    // email 唯一约束冲突等运行时异常会导致整个事务回滚
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     public StudentDto createStudent(StudentDto studentDto) {
         Student student = StudentMapper.mapToStudent(studentDto);
