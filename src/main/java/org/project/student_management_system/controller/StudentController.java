@@ -1,5 +1,6 @@
 package org.project.student_management_system.controller;
 
+import jakarta.validation.Valid;
 import org.project.student_management_system.dto.StudentDto;
 import org.project.student_management_system.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto studentDto) {
+    public ResponseEntity<StudentDto> createStudent(@RequestBody @Valid StudentDto studentDto) {
         StudentDto savedStudent = ss.createStudent(studentDto);
         return new ResponseEntity<>(savedStudent, HttpStatus.CREATED);
     }
@@ -39,7 +40,7 @@ public class StudentController {
     @PutMapping("/{id}")
     public ResponseEntity<StudentDto> updateStudent(
             @PathVariable Long id,
-            @RequestBody StudentDto studentDto) {
+            @RequestBody @Valid StudentDto studentDto) {
         StudentDto updatedStudent = ss.updateStudent(id, studentDto);
         return ResponseEntity.ok(updatedStudent);
     }
